@@ -1,7 +1,7 @@
 import datetime
 import os.path
 import pickle
-import subprocess
+
 import tkinter as tk
 
 import face_recognition
@@ -48,7 +48,7 @@ class App:
         self.log_dir = './logs.txt'
     def addWebcam(self, label):
         if 'cap' not in self.__dict__:
-            self.cap = cv2.VideoCapture(1)
+            self.cap = cv2.VideoCapture(0)
 
         self._label = label
         self.processWebcam()
@@ -86,10 +86,10 @@ class App:
                 util.msg_box("Oops!", 'Unknown User. Please try again!')
             else:
                 util.msg_box("Success!", f"Welcome back\n {name}")
-
-            with open(self.log_dir, 'a') as f:
-                f.write(f'{name} logged in at {datetime.datetime.now()}\n')
-                f.close()
+#               create log
+                with open(self.log_dir, 'a') as f:
+                    f.write(f'{name} logged in at {datetime.datetime.now()}\n')
+                    f.close()
         else:
             util.msg_box("Spoofer Spoofer!", 'Pants on fire!')
 
